@@ -3,14 +3,14 @@
   "rules": [
     {
       "domain": [
-        "weixinsxy.com",
-        "wxapp.tc.qq.com"
+        "www.binance.com",
+        "www.okx.com"
       ]
     },
     {
       "domain_suffix": [
-        ".weixinsxy.com",
-        ".wxapp.tc.qq.com"
+        ".okx.com",
+        ".binance.com"
       ]
     },
     {
