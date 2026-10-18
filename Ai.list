@@ -17,7 +17,7 @@ DOMAIN-SUFFIX,generativeai.google
 DOMAIN-SUFFIX,ai.google
 DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
 DOMAIN-SUFFIX,notifications-pa.googleapis.com
-
+DOMAIN-SUFFIX,muse.ai
 # ===== Claude / Anthropic =====
 DOMAIN-SUFFIX,anthropic.com
 DOMAIN-SUFFIX,claude.ai
