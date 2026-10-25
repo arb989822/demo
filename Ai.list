@@ -33,19 +33,9 @@ DOMAIN-SUFFIX,auth0.com
 DOMAIN-SUFFIX,challenges.cloudflare.com
 DOMAIN-SUFFIX,identrust.com
 DOMAIN-SUFFIX,stripe.com
-DOMAIN-SUFFIX,intercom.io
-DOMAIN-SUFFIX,intercomcdn.com
-DOMAIN-SUFFIX,sentry.io
 DOMAIN-SUFFIX,accounts.google.com
 
 # ===== 对话大模型 =====
-DOMAIN-SUFFIX,chatgpt.com
-DOMAIN-SUFFIX,openai.com
-DOMAIN-SUFFIX,claude.ai
-DOMAIN-SUFFIX,anthropic.com
-DOMAIN-SUFFIX,claude.site
-DOMAIN-SUFFIX,gemini.google.com
-DOMAIN-SUFFIX,ai.google
 DOMAIN-SUFFIX,deepmind.google
 DOMAIN-SUFFIX,grok.com
 DOMAIN-SUFFIX,x.ai
@@ -58,7 +48,6 @@ DOMAIN-SUFFIX,character.ai
 DOMAIN-SUFFIX,copilot.microsoft.com
 
 # ===== API / 开发者 =====
-DOMAIN-SUFFIX,generativelanguage.googleapis.com
 DOMAIN-SUFFIX,aistudio.google.com
 DOMAIN-SUFFIX,openrouter.ai
 DOMAIN-SUFFIX,groq.com
@@ -70,7 +59,6 @@ DOMAIN-SUFFIX,replicate.com
 
 # ===== 图像 / 视频 / 音频生成 =====
 DOMAIN-SUFFIX,midjourney.com
-DOMAIN-SUFFIX,sora.com
 DOMAIN-SUFFIX,leonardo.ai
 DOMAIN-SUFFIX,ideogram.ai
 DOMAIN-SUFFIX,runwayml.com
