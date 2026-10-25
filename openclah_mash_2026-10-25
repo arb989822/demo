@@ -1,0 +1,138 @@
+port: 7890
+socks-port: 7891
+redir-port: 7892
+allow-lan: true
+bind-address: "*"
+mode: rule
+log-level: info
+external-controller: 0.0.0.0:9090
+secret: ""
+
+# ====================== DNS 2025-2026 终极无坑版 ======================
+dns:
+  enable: true
+  ipv6: false
+  prefer-h3: true
+  listen: 0.0.0.0:53
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter-mode: blacklist
+  query-timeout: 5
+  fake-ip-filter:
+    - '*.lan' - '*.local' - '*.home' - '*.localdomain'
+    - 'stun.*' - 'time.*' - 'ntp.*' - 'localhost' - 'router.*'
+    - '+.apple.com' - '+.icloud.com' - '+.mzstatic.com' - '+.mask.icloud.com' - '+.mask-h2.icloud.com'
+    - '+.configuration.apple.com' - '+.push.apple.com' - '+.push-apple.com.akadns.net'
+    - '+.aaplimg.com' - '+.cdn-apple.com' - '+.icloud-content.com' - '+.apple-cloudkit.com'
+    - '+.app-attest.apple.com' - '+.ls.apple.com.akadns.net' - '+.itunes.apple.com'
+    - '+.crashlytics.com' - '+.hcaptcha.com' - '+.msftconnecttest.com' - '+.msftncsi.com'
+    - '+.ipv6.microsoft.com' - '+.identrust.com' - '+.digicert.com' - '+.ocsp.digicert.com'
+    - '+.crl.identrust.com' - '+.akamaiedge.net' - '+.windowsupdate.com' - '+.update.microsoft.com'
+    - '+.qq.com' - '+.weixin.qq.com' - '+.tencent.com' - '+.tenpay.com'
+    - '+.alipay.com' - '+.alipayobjects.com'
+    - '+.bilibili.com' - '+.bilivideo.com' - '+.hdslb.com' - '+.acgvideo.com'
+    - '+.xiaomi.com' - '+.mi.com' - '+.miui.com'
+    - '+.tailscale.com' - '+.zerotier.com' - '+.parsec.app'
+    - '+.helpshift.com' - '+.sentry.io'
+    - '+.epicgames.com' - '+.epicgames.dev'
+    - '+.battle.net' - '+.blizzard.com' - '+.battlenet.com.cn'
+
+  default-nameserver:
+    - 114.114.114.114
+    - 223.5.5.5
+    - 1.1.1.1
+
+  # 默认走国内最快 DNS（国内网站秒开）
+  nameserver:
+    - 114.114.114.114
+    - tls://223.5.5.5:853
+    - https://doh.pub/dns-query          # 腾讯公共 DoH 备用
+
+  # 污染兜底走代理加密 DNS（最干净）
+  fallback:
+    - https://1.1.1.1/dns-query#PROXY
+    - https://dns.google/dns-query#PROXY
+
+fallback-filter:
+  geoip: true
+  geoip-code: CN
+  ipcidr:
+    - 10.0.0.0/8
+    - 127.0.0.1/8
+    - 172.16.0.0/12
+    - 192.168.0.0/16
+    - 240.0.0.0/4
+    - 119.29.29.29/32
+    - 223.5.5.5/32
+  # ← 下面这三行是治愈 Google 红字的终极灵药
+  domain:
+    - '+.google.com'
+    - '+.googleapis.com'
+    - '+.gstatic.com'
+    - '+.youtube.com'
+    - '+.youtu.be'
+    - '+.ytimg.com'  
+    - '+.ggpht.com'
+    - '+.gmail.com'
+
+  nameserver-policy:
+    'geosite:cn,private,apple,tencent,xiaomi,alipay':
+      - 114.114.114.114
+      - tls://223.5.5.5:853
+    'geosite:geolocation-!cn':
+      - https://1.1.1.1/dns-query#PROXY
+      - https://dns.google/dns-query#PROXY
+# ====================== 规则集（保持最新）======================
+ruleset=💰 币交易所,https://raw.githubusercontent.com/arb989822/bnok/refs/heads/main/BNOK.list
+ruleset=💸 提法币,https://raw.githubusercontent.com/arb989822/bnok/refs/heads/main/cex.list
+ruleset=📹 油管视频,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list
+ruleset=💬 OpenAi,https://raw.githubusercontent.com/arb989822/demo/refs/heads/main/Ai.list
+ruleset=🛑 广告拦截,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list
+ruleset=🍃 应用净化,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list
+ruleset=📲 X电报DC,https://raw.githubusercontent.com/arb989822/demo/refs/heads/main/Telegram.list
+ruleset=📢 谷歌Block,[]DOMAIN-SUFFIX,developer.android.google.cn
+ruleset=📢 谷歌🇨🇳,[]DOMAIN-SUFFIX,xn--ngstr-lra8j.com
+ruleset=📢 谷歌🇨🇳,[]DOMAIN-SUFFIX,services.googleapis.cn
+ruleset=📢 谷歌🇨🇳,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleCNProxyIP.list
+ruleset=📢 谷歌🇨🇳,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleCN.list
+ruleset=📢 谷歌,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Google.list
+ruleset=Ⓜ️ 微软Bing,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Bing.list
+ruleset=Ⓜ️ 微软云盘,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/OneDrive.list
+ruleset=Ⓜ️ 微软服务,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Microsoft.list
+ruleset=🍎 苹果服务,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list
+ruleset=🎮 游戏平台,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Steam.list
+ruleset=🎥 奈飞视频,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Netflix.list
+ruleset=📺 哔哩哔哩,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Bilibili.list
+ruleset=🌏 国内媒体,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list
+ruleset=🌍 国外媒体,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list
+ruleset=🚀 节点选择,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list
+ruleset=🎯 全球直连,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list
+ruleset=🎯 全球直连,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/UnBan.list
+ruleset=🎯 全球直连,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaDomain.list
+ruleset=🎯 全球直连,[]GEOIP,CN
+ruleset=🐟 漏网之鱼,[]FINAL
+
+# ====================== 分组（最终优化版）=====================
+custom_proxy_group=💰 币交易所`url-test`(交易)`http://www.gstatic.com/generate_204`300,,200
+custom_proxy_group=💸 提法币`url-test`(新加坡)`http://www.gstatic.com/generate_204`300,,200
+custom_proxy_group=📲 X电报DC`url-test`(社交|日本|新加坡)`http://www.gstatic.com/generate_204`300,,200
+custom_proxy_group=📹 油管视频`load-balance`round-robin`(油管)`http://www.gstatic.com/generate_204`300,50
+custom_proxy_group=💬 OpenAi`fallback`(cn2|新加坡|日本)`http://chat.openai.com/cdn-cgi/trace`300,,200
+custom_proxy_group=♻️ 自动选择`url-test`(日本|新加坡|美国)`http://www.gstatic.com/generate_204`300,,200
+custom_proxy_group=📢 谷歌Block`url-test`(新加坡|日本|美国)`http://www.gstatic.com/generate_204`300,,200
+custom_proxy_group=📢 谷歌🇨🇳`url-test`(新加坡|日本|美国)`http://www.gstatic.com/generate_204`300,,200
+custom_proxy_group=📢 谷歌`url-test`(新加坡|日本|美国|法国)`http://www.gstatic.com/generate_204`300,,200
+custom_proxy_group=Ⓜ️ 微软Bing`url-test`(日本|新加坡|美国)`http://www.gstatic.com/generate_204`300,,200
+custom_proxy_group=Ⓜ️ 微软云盘`url-test`(日本|新加坡|美国)`http://www.gstatic.com/generate_204`300,,200
+custom_proxy_group=Ⓜ️ 微软服务`url-test`(日本|新加坡|美国)`http://www.gstatic.com/generate_204`300,,200
+custom_proxy_group=🍎 苹果服务`url-test`(日本|新加坡|美国)`http://www.gstatic.com/generate_204`300,,200
+custom_proxy_group=🚀 节点选择`select`[]♻️ 自动选择`[]DIRECT`.*新加坡.*`.*美国.*`.*法国.*`.*油管.*
+custom_proxy_group=🎮 游戏平台`select`[]🚀 节点选择`[]🎯 全球直连`[]♻️ 自动选择`.*
+custom_proxy_group=🎥 奈飞视频`select`[]🚀 节点选择`[]🎯 全球直连`[]♻️ 自动选择`.*
+custom_proxy_group=📺 哔哩哔哩`select`[]🎯 全球直连`[]🚀 节点选择`[]♻️ 自动选择`.*
+custom_proxy_group=🌏 国内媒体`select`[]🎯 全球直连`[]🚀 节点选择`[]♻️ 自动选择`.*
+custom_proxy_group=🌍 国外媒体`select`[]🚀 节点选择`[]♻️ 自动选择`[]🎯 全球直连`.*
+custom_proxy_group=🎯 全球直连`select`[]DIRECT`[]🚀 节点选择`[]♻️ 自动选择
+custom_proxy_group=🛑 广告拦截`select`[]REJECT`[]DIRECT
+custom_proxy_group=🍃 应用净化`select`[]REJECT`[]DIRECT
+custom_proxy_group=🐟 漏网之鱼`select`[]♻️ 自动选择`[]🚀 节点选择`[]🎯 全球直连`[]DIRECT`.*
